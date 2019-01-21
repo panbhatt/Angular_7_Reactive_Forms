@@ -1,0 +1,98 @@
+<section class="section is-desktop is-vcentered">
+  <form (ngSubmit)="save(loginForm)" #loginForm="ngForm" novalidate>
+    <div class="container  is-desktop is-vcentered">
+      
+      <div class="columns is-centered ">
+        <div class="column is-half">
+          <h3 class="title is-3 is-centered">Template Drive Login Form</h3>
+          <div class="field">
+            <label class="label">User Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" required [(ngModel)]="user.username" #userNameVar="ngModel" name="username"
+                minlength="5"
+                [ngClass]="{'is-danger' : (userNameVar.touched || userNameVar.dirty ) && !userNameVar.valid} ">
+            </div>
+            <span *ngIf="(userNameVar.touched || userNameVar.dirty ) && !userNameVar.valid">
+              <p class="help is-danger" *ngIf="userNameVar.errors?.required">Username is required</p>
+              <p class="help is-danger" *ngIf="userNameVar.errors?.minlength">This Username is invalid</p>
+            </span>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="email" placeholder="email@email.com" [(ngModel)]="user.email" name="email" #userEmailVar="ngModel"
+                required minlength="10">
+              <span class="icon is-small is-left">
+              <fa-icon icon="envelope"></fa-icon>
+            </span>
+              <span class="icon is-small is-right">
+              <fa-icon icon="exclamation-triangle"></fa-icon>
+            </span>
+            </div>
+            <span *ngIf="(userEmailVar.touched || userEmailVar.dirty ) && !userEmailVar.valid">
+            <p class="help is-danger" *ngIf="userEmailVar.errors?.minlength">This email is invalid</p>
+            <p class="help is-danger" *ngIf="userEmailVar.errors?.required">This email is required</p>
+            </span>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="password" placeholder="Email input" value="hello@" required minlength="8" [(ngModel)]="user.password"
+                name="userPwd" #userPwdVar="ngModel">
+              <span class="icon is-small is-left">
+              <fa-icon icon="password"></fa-icon>
+            </span>
+              <span class="icon is-small is-right">
+              <fa-icon icon="exclamation-triangle"></fa-icon>
+            </span>
+            </div>
+
+            <span *ngIf="(userPwdVar.touched || userPwdVar.dirty ) && !userPwdVar.valid">
+            <p class="help is-danger" *ngIf="userPwdVar.errors?.minlength">This Password is invalid</p>
+            <p class="help is-danger" *ngIf="userPwdVar.errors?.required">This Password is required</p>
+            </span>
+          </div>
+
+          <div class="field is-centered">
+            <div class="control is-centered">
+              <label class="checkbox">
+              <input type="checkbox">
+              I agree to the <a href="#">terms and conditions</a>
+            </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <label class="radio">
+              <input type="radio" name="question">
+              Yes
+            </label>
+              <label class="radio">
+              <input type="radio" name="question">
+              No
+            </label>
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link" [disabled]="!loginForm.valid">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-link">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <hr/>
+  <br class="is-centered"/> Dirty : {{ loginForm.dirty}} 
+  <br/> Touched : {{ loginForm.touched}} 
+  <br/> Valid : {{ loginForm.valid}} 
+  <br/> VALUE ->  : {{ loginForm.value | json}} 
+</section>
