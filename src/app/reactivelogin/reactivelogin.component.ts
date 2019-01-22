@@ -53,10 +53,15 @@ export class ReactiveloginComponent implements OnInit {
       tAndC: true,
       notification: 'email',
       phone: ''
-    })
+    }); 
+
+    this.loginForm.valueChanges.subscribe(val => console.log("Form value = " + JSON.stringify(val))) ;
+    this.loginForm.get('phone').valueChanges.subscribe(val => console.log("PHONE value = " + val)) ;
 
 
 
+    // this can also be used to call setNotification manually rather then doign (click) on notification.
+    this.loginForm.get('notification').valueChanges.subscribe(val => console.log("NOt Changes = "+ val)) ;
   }
 
   save(): void {
@@ -92,6 +97,7 @@ export class ReactiveloginComponent implements OnInit {
     console.log(notControl);
     let phone = this.loginForm.get('phone');
     console.log(phone);
+    
 
     // Applyign validation over the control. 
     if (opt == 'phone') {
